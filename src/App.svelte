@@ -4,23 +4,12 @@
     import { v4 as uuidv4 } from 'uuid';
     import Thread from './Thread.svelte';
     import ImageGallery from './ImageGallery.svelte';
-    import TableOfContent from './TableOfContent.svelte';
+    import NavigationBar from './NavigationBar.svelte';
+    import BoardGallery from './BoardGallery.svelte';
 
     let threads = [];
     let newThreadTitle = '';
     let clientId;
-    const council = [
-        {id: 1, title: 'Internal Committee Director', name: 'Karina Zambani'},
-        {id: 2, title: 'Internal Committee Member', name: 'David Sun'}, 
-        {id: 3, title: 'Internal Committee Director', name: 'Karina Zambani'},
-        {id: 4, title: 'Internal Committee Member', name: 'David Sun'}, 
-        {id: 5, title: 'Internal Committee Director', name: 'Karina Zambani'},
-        {id: 6, title: 'Internal Committee Member', name: 'David Sun'}, 
-        {id: 7, title: 'Internal Committee Director', name: 'Karina Zambani'},
-        {id: 8, title: 'Internal Committee Member', name: 'David Sun'}, 
-        {id: 9, title: 'Internal Committee Director', name: 'Karina Zambani'},
-        {id: 10, title: 'Internal Committee Member', name: 'David Sun'}, 
-    ];
 
     onMount(async () => {
         // Generate or retrieve client ID
@@ -85,14 +74,6 @@
     function hasDownvoted(thread) {
         return thread.downvotedBy.includes(clientId);
     }
-
-    const images = [
-        { src: '/images/ucsd1.jpg', alt: 'UCSD Campus View' },
-        { src: '/images/ucsd2.jpg', alt: 'Geisel Library' },
-        { src: '/images/ucsd3.jpg', alt: 'UCSD Beach' },
-        { src: '/images/ucsd4.jpg', alt: 'Price Center' },
-        { src: '/images/ucsd5.jpg', alt: 'UCSD Sculpture' }
-    ];
 </script>
 
 <main>
@@ -104,64 +85,82 @@
         </div>
     </div>
 
+    <NavigationBar />
+
     <div class="main-page">
-        <h2>WE ARE HERE!</h2>
-        <p>
-            Introducing the all new HDSI Student Council, operated by data science students, and for ALL data science students! No matter if you are an undergraduate or graduate, majoring or minoring, prospective student or alumni, we are here to help you all!
-            Our mission is to advocate for the student body, and connect everyone with the school administration, department and campus resources, alumni, and outside institutes. 
-            As this is the first year for HDSI Student Council, we would like to collect feedback and suggestion from all of you on what we should focus on. Share with us any ideas, questions, complaints, or random thoughts you have! 
-        </p>
-        <div class="follow-us">
-            Remember to follow us:  
-            <a href="https://www.instagram.com/">Instagram</a> 
-            <a href="https://www.x.com/">Twitter</a> 
-            <a href="https://www.linkedin.com/">LinkedIn</a> 
-            <a href="https://www.discord.com/">Discord</a>
-        </div>
-
+        <section id="Top">
+            <img id="logo" src="/assets/logo.png" alt="HDSI Student Council"/>
+            <h2>WE ARE HERE!</h2>
+            <p>
+                Introducing the all new HDSI Student Council, operated by data science students, and for ALL data science students! No matter if you are an undergraduate or graduate, majoring or minoring, prospective student or alumni, we are here to help you all!
+                Our mission is to advocate for the student body, and connect everyone with the school administration, department and campus resources, alumni, and outside institutes. 
+                As this is the first year for HDSI Student Council, we would like to collect feedback and suggestion from all of you on what we should focus on. Share with us any ideas, questions, complaints, or random thoughts you have! 
+            </p>
+            <div class="follow-us">
+                Remember to follow us:  
+                <a href="https://www.instagram.com/hdsistudentcouncil?igsh=MzRlODBiNWFlZA=="><img class="linked-icon" src="/assets/Instagram_Glyph_Black.png" alt="Instagram"></a> 
+                <a href="https://www.x.com/"><img class="linked-icon" src="/assets/X-logo-black.png" alt="Twitter/X"></a> 
+                <a href="https://www.linkedin.com/"><img class="linked-icon" src="/assets/LI-In-Bug.png" alt="LinkedIn"></a> 
+                <a href="https://www.discord.com/"><img class="linked-icon" src="/assets/discord-mark-black.png" alt="Discord"></a>
+            </div>
+        </section>
         <hr>
-
-        <h2>Latest News & Events</h2>
-        <ImageGallery {images} />
-        <div>
-            <iframe title="Calendar" class="google-calendar" src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FLos_Angeles&bgcolor=%23ffffff&src=ZGF2aWRzdW4yMDAyMDkxNUBnbWFpbC5jb20&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%234285F4" frameborder="0" scrolling="no"></iframe>
-        </div>
-        
+        <section id="News and Upcoming Events">
+            <h2>Latest News & Events</h2>
+            <ImageGallery />
+        </section>
         <hr>
-
-        <h2>Vote for your next event</h2>
-        <p>We want to gather ideas from everyone on what events they want to have!</p>
-        <p>Have you filled out the <a href="https://forms.gle/9shDPvjwwru9Lbtu9">Feedback & Suggestion Form</a> yet?</p>
-        <form on:submit|preventDefault={createThread}>
-            <input bind:value={newThreadTitle} placeholder="Tell us your idea!" required>
-            <button type="submit">Create Thread</button>
-        </form>
-        <div class="threads-block">
-            {#each threads as thread (thread.id)}
-                <Thread 
-                    {thread} 
-                    upvoted={hasUpvoted(thread)}
-                    downvoted={hasDownvoted(thread)}
-                    on:vote={(event) => voteThread(thread.id, event.detail)}
-                />
-            {/each}
-        </div>
-
+        <section id="Feedback Form">
+            <h2>Questions for HDSI or Student Council?</h2>
+            <p>
+                Have you ever wanted to suggest improvements to the data science curriculum? Have you had difficulty in reaching out to faculty members? Do you have a specific issue that HDSI currently cannot address?
+                Or maybe you would like to see more fun events from the student council? 
+                You can share your thoughts on us, the department, or academic curriculum through our <u>Feedback & Suggestions Form</u>!
+            </p>
+            <div class="form-button-container">
+                <a href="https://forms.gle/9shDPvjwwru9Lbtu9" target="_blank" class="form-button">
+                    <span class="button-text">Give Us Feedback!</span>
+                    <span class="button-icon">📝</span>
+                </a>
+            </div>
+        </section>
         <hr>
+        <section id="Vote Events">
+            <h2>Here Are Some Future Events. Vote For Your Favorite!</h2>
+            <form on:submit|preventDefault={createThread}>
+                <input bind:value={newThreadTitle} placeholder="Tell us your idea!" required>
+                <button type="submit">Create Thread</button>
+            </form>
+            <div class="threads-block">
+                {#each threads as thread (thread.id)}
+                    <Thread 
+                        {thread} 
+                        upvoted={hasUpvoted(thread)}
+                        downvoted={hasDownvoted(thread)}
+                        on:vote={(event) => voteThread(thread.id, event.detail)}
+                    />
+                {/each}
+            </div>
+        </section>
+        <hr>
+        <section id="Board Introduction">
+            <h2>Meet the Board</h2>
+            <BoardGallery />
+        </section>
+        <hr>
+        <section id="Resources">
+            <h2>Student Resources</h2>
+            <div class="resources-channel">
+                <a href="placeholder">Apply For Conference Travel Fund</a>
+            </div>
+        </section>
+    </div>
 
-        <h2>Meet the Board</h2>
-        <div class="group">
-            {#each council as person (person.id)}
-                <div class="person">
-                    <img class="profile-pic" src="/profiles/placeholder.jpg" alt="Board Member"/>
-                    <span class="name">{person.name}</span><br>
-                    <span class="title">{person.title}</span><br>
-                    <p>Fun Fact</p>
-                </div>
-            {/each}
+    <div class="footer-bar">
+        <div class="footer-logo-container">
+            <a href="https://ucsd.edu/"><img class="footer-logo" src="/assets/ucsd-footer-logo-white.png" alt="UCSD"/></a>
         </div>
     </div>
-    <div class="footer-bar"></div>
 </main>
 
 <style>
@@ -170,8 +169,8 @@
         src: url('/fonts/HvDTrial_BrixSans-Light-BF64c337930afcd.otf') format('opentype');
     }
     @font-face {
-        font-family: 'Brix Sans Regular';
-        src: url('/fonts/HvDTrial_BrixSans-Regular-BF64c3379310193.otf') format('opentype');
+        font-family: 'Brix Sans Medium';
+        src: url('/fonts/HvDTrial_BrixSans-Medium-BF64c337932cdbe.otf') format('opentype');
     }
     main {
         font-family: 'Brix Sans Light', Arial, sans-serif;
@@ -217,16 +216,52 @@
         letter-spacing: 0.5px;
         margin: 0 0 20px;
     }
+    #logo {
+        margin: 0 calc(50% - 75px);
+        width: 150px;
+        height: 150px;
+    }
     .follow-us {
         font-weight: 10;
         font-size: 18px;
         letter-spacing: 0.5px;
     }
-    .google-calendar {
-        border:solid 1px #777;
-        width: 80%;
-        aspect-ratio: 4/3;
-        margin: 20px 10%;
+    .linked-icon {
+        width: auto;
+        height: 18px;
+        margin: 0 5px;
+    }
+    .form-button-container {
+        width: 90%;
+        max-width: 600px;
+        margin: 2rem auto;
+        text-align: center;
+    }
+    .form-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        background-color: #4285f4;
+        color: white;
+        padding: 20px 40px;
+        border-radius: 16px;
+        text-decoration: none;
+        font-size: 1.5rem;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    .form-button:hover {
+        background-color: #3367d6;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .button-text {
+        margin-right: 8px;
+    }
+    .button-icon {
+        font-size: 1.8rem;
     }
     form {
         display: flex;
@@ -249,34 +284,15 @@
         max-height: 600px;
         overflow-y: auto;
     }
-    .group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
+    .resources-channel {
+        margin-bottom: 100px;
     }
-    .person {
-        width: calc(20% - 10px);
-        aspect-ratio: 4/1;
-        background-color: lightblue;
-        text-align: center;
-    }
-    img.profile-pic {
-        width: 90%;
-        aspect-ratio: 1/1;
-        margin: 10px auto;
-        object-fit: fill;
-    }
-    .name {
-        font-family: 'Brix Sans Regular', Arial, sans-serif;
-        font-size: 20px;
-        white-space: normal;
-    }    
     hr {
         height: 0.5px;
         color: #484949;
         margin: 50px 0;
     }
-    .title-bar, .footer-bar {
+    .title-bar {
         background-image: url(https://datascience.ucsd.edu/wp-content/uploads/2024/04/Footer_1688x485px-scaled.jpg);
         background-position: center center;
         background-color: #0079d3;
@@ -289,6 +305,16 @@
     }
     .footer-bar {
         height: 150px;
+        background-color: #00629B;
+        padding: 30px 0 0 0;
+    }
+    .footer-logo-container {
+        text-align: right;
+        height: 30%;
+        padding: 0 50px;
+    }
+    .footer-logo {
+        height: 30px;
     }
     a:link.homing {color: #fff;}
     a:visited.homing {color: #fff;}

@@ -1,10 +1,15 @@
-<!-- ImageGallery.svelte -->
 <script>
     import { onMount, onDestroy } from 'svelte';
 
-    export let images = [];
     let currentIndex = 0;
     let interval;
+    const images = [
+        { src: '/images/ucsd1.jpg', alt: 'UCSD Campus View' },
+        { src: '/images/ucsd2.jpg', alt: 'Geisel Library' },
+        { src: '/images/ucsd3.jpg', alt: 'UCSD Beach' },
+        { src: '/images/ucsd4.jpg', alt: 'Price Center' },
+        { src: '/images/ucsd5.jpg', alt: 'UCSD Sculpture' }
+    ];
 
     function nextImage() {
         currentIndex = (currentIndex + 1) % images.length;
@@ -29,23 +34,14 @@
             />
         {/each}
     </div>
-    <div class="event-container">
-        <div class="event_detail">
-            <span class="event-title">Halloween Night</span><br>
-            <span class="event-description">Come join us at HDSI Multi-purpose room on </span> <a class="date">October 23rd, Wednesday, 6:00 pm</a>
-        </div>
-        <div class="event_detail">
-            <span class="event-title">Study Jam</span><br>
-            <span class="event-description">Come join us at HDSI Multi-purpose room on </span> <a class="date">October 23rd, Wednesday, 6:00 pm</a>
-        </div>
-        <div class="event_detail">
-            <span class="event-title">Midterm Movie Night</span><br>
-            <span class="event-description">Come join us at HDSI Multi-purpose room on </span> <a class="date">October 23rd, Wednesday, 6:00 pm</a>
-        </div>
-        <div class="event_detail">
-            <span class="event-title">Career Workshop</span><br>
-            <span class="event-description">Come join us at HDSI Multi-purpose room on </span> <a class="date">October 23rd, Wednesday, 6:00 pm</a>
-        </div>
+    <div class="google-calendar">
+        <iframe 
+            title="Calendar" 
+            src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FLos_Angeles&bgcolor=%23ffffff&src=ZGF2aWRzdW4yMDAyMDkxNUBnbWFpbC5jb20&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%234285F4" 
+            frameborder="0" 
+            style="width: 100%; height: 100%;"
+            scrolling="no"
+        ></iframe>
     </div>
 </div>
 
@@ -53,13 +49,14 @@
 <style>
     .container {
         display: flex;
-        gap: 20px;
+        max-width: 1200px;
     }
     .image-gallery {
         position: relative;
-        width: 60%;
-        aspect-ratio: 16/9;
+        width: 40%;
+        aspect-ratio: 3/4;
         overflow: hidden;
+        border-radius: 12px;
     }
     img {
         position: absolute;
@@ -74,17 +71,13 @@
     img.active {
         opacity: 1;
     }
-    .event_detail {
-        font-size: 20px;
-        margin: 10px 0;
-    }
-    .event-title {
-        font-weight: 600;
-    }
-    .event-description {
-        font-weight: 100;
-    }
-    .event-container {
-        overflow-y: scroll;
+    .google-calendar {
+        position: relative;
+        width: 60%;
+        height: auto;
+        margin: 0 20px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 </style>
