@@ -41,7 +41,7 @@ app.put('/api/threads/:id/vote', (req, res) => {
         return res.status(400).send('Missing clientId or voteType');
     }
 
-    const thread = threadConfig.threads.find(t => t.id === threadId);
+    const thread = threads.find(t => t.id === threadId);
     if (!thread) {
         return res.status(404).send('Thread not found');
     }
