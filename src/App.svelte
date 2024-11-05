@@ -127,10 +127,6 @@
         <hr>
         <section id="Vote Events">
             <h2>Here Are Some Future Events. Vote For Your Favorite!</h2>
-            <form on:submit|preventDefault={createThread}>
-                <input bind:value={newThreadTitle} placeholder="Tell us your idea!" required>
-                <button type="submit">Create Thread</button>
-            </form>
             <div class="threads-block">
                 {#each threads as thread (thread.id)}
                     <Thread 
