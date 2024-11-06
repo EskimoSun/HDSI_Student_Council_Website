@@ -1,4 +1,8 @@
 <script>
+    /**
+     * TODO: Fill in board member information
+     * Required fields: name, title, prefix, tags(max 3), about, profile_photo
+     */
     const council = [
         { id: 'person1', name: 'Jennifer Hung', title: 'Co-President', prefix: 'Undergraduate', tags: ['Friendly', 'Planner', 'Love Dogs'], about: 'Fun Fact', profile_photo: '/profiles/placeholder.jpg'},
         { id: 'person2', name: 'Dheeraj', title: 'Co-President', prefix: 'Graduate', tags: [''], about: 'Fun Fact', profile_photo: '/profiles/placeholder.jpg'},

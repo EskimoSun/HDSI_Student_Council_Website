@@ -3,6 +3,9 @@
 
     let currentIndex = 0;
     let interval;
+    /**
+     * TODO: Add and change image sources to event posters
+     */
     const images = [
         { src: '/images/ucsd1.jpg', alt: 'UCSD Campus View' },
         { src: '/images/ucsd2.jpg', alt: 'Geisel Library' },
@@ -34,7 +37,9 @@
             />
         {/each}
     </div>
+    <!-- Google Calendar -->
     <div class="google-calendar">
+        <!-- TODO: Change calendar source to HDSI Google Calendar -->
         <iframe 
             title="Calendar" 
             src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FLos_Angeles&bgcolor=%23ffffff&src=ZGF2aWRzdW4yMDAyMDkxNUBnbWFpbC5jb20&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%234285F4" 

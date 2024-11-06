@@ -7,7 +7,12 @@ const port = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
+/**
+ * TODO: threads should be empty by default
+ * Required: id, title, upvotes, downvotes, upvotedBy, downvotedBy
+ */
 let threads = [
+    // Example threads to be deleted
     { id: 1, title: "First Year Mixer", upvotes: 10, downvotes: 0, upvotedBy: new Set(), downvotedBy: new Set() },
     { id: 2, title: "Career Event", upvotes: 5, downvotes: 0, upvotedBy: new Set(), downvotedBy: new Set() },
     { id: 3, title: "DJ Party", upvotes: 8, downvotes: 0, upvotedBy: new Set(), downvotedBy: new Set() },
@@ -33,6 +38,7 @@ app.get('/api/threads', (req, res) => {
     res.json(serializableThreads);
 });
 
+// Vote on a thread
 app.put('/api/threads/:id/vote', (req, res) => {
     const threadId = parseInt(req.params.id);
     const { clientId, voteType } = req.body;
@@ -96,6 +102,7 @@ app.post('/manage/threads', localOnly, (req, res) => {
     });
 });
 
+// Delete a thread with the given id
 app.delete('/manage/threads/:id', localOnly, (req, res) => {
     const id = parseInt(req.params.id);
     const index = threads.findIndex(t => t.id === id);

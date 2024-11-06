@@ -1,88 +1,98 @@
-## Get started
+# HDSI Student Council Website
 
-Install the dependencies...
+This is the official website for the Halıcıoğlu Data Science Institute (HDSI) Student Council at UC San Diego. The website serves as a central hub for HDSI students to:
 
+- Stay updated with latest news and upcoming events
+- Submit feedback and suggestions
+- Vote on event proposals
+- Learn about Student Council board members
+- Access important student resources
+
+## Project Structure
+```
+hdsi-student-council-website/
+├── src/               # Svelte components and frontend code
+├── public/           # Static assets (images, icons, etc.)
+├── server/           # Backend server code
+└── package.json      # Project dependencies
+```
+
+## Prerequisites
+
+Before getting started, make sure you have the following installed:
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
+- [Git](https://git-scm.com/)
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/EskimoSun/HDSI_Student_Council_Website.git
+```
+
+2. Navigate to the project directory:
+```bash
+cd hdsi-student-council-website
+```
+
+3. Install the dependencies:
 ```bash
 npm install
 ```
 
-...then start [Rollup](https://rollupjs.org):
+## Running the website
+1. Start the development server:
+```bash
+cd Server
+node backend.js
+```
+Make sure the backend server is running before starting the Svelte application. Port 3000 is used for the backend server.
 
+2. Launch the website:
+Start a new terminal window and navigate to the project directory. Run the following command to start the Svelte application:
 ```bash
 npm run dev
 ```
-
 Navigate to [localhost:8080](http://localhost:8080). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
+## API Documentation
+The backend API endpoints are available at `http://localhost:3000`:
 
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
+| Endpoint | Method | Description |
+|----------|---------|------------|
+| /manage/threads | GET | List all event threads |
+| /manage/threads | POST | Create new event thread |
+| /manage/threads/:id | DELETE | Delete specific thread |
 
-## Building and running in production mode
-
-To create an optimised version of the app:
-
+To manage event threads while the backend server is running, use these curl commands from a new terminal window:
+1. List all threads:
 ```bash
-npm run build
+curl http://localhost:3000/manage/threads
 ```
 
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
-
-```js
-"start": "sirv public --single"
-```
-
-## Using TypeScript
-
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
+2. Add a new thread, remembe to change "New Event" to your event details:
 ```bash
-node scripts/setupTypeScript.js
+curl -X POST -H "Content-Type: application/json" -d \'{"title":"New Event"}\' http://localhost:3000/manage/threads
 ```
 
-Or remove the script via:
-
+3. Delete a thread (replace <id> with the thread ID):
 ```bash
-rm scripts/setupTypeScript.js
+curl -X DELETE http://localhost:3000/manage/threads/<id>
 ```
 
-If you want to use `baseUrl` or `path` aliases within your `tsconfig`, you need to set up `@rollup/plugin-alias` to tell Rollup to resolve the aliases. For more info, see [this StackOverflow question](https://stackoverflow.com/questions/63427935/setup-tsconfig-path-in-svelte).
+## Contributing
+1. Fork the repository
+2. Create a feature branch
+3. Submit a Pull Request
 
-## Deploying to the web
+## Troubleshooting
+Common issues and their solutions:
+- Port 3000 already in use: Kill the existing process or change the port in `backend.js`
+- Node modules errors: Try deleting `node_modules` and running `npm install` again
 
-### With [Vercel](https://vercel.com)
+## License
+[No License Yet]
 
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+## Contact
+For questions or issues, please contact HDSI Student Council at hdsistudentcouncil@ucsd.edu

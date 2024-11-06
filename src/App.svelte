@@ -21,6 +21,9 @@
         await fetchThreads();
     });
 
+    /**
+     * Fetch all events from the server 
+     */
     async function fetchThreads() {
         const response = await fetch('http://localhost:3000/api/threads');
         const fetchedThreads = await response.json();
@@ -31,6 +34,9 @@
         }));
     }
 
+    /**
+     * Create and add a new event to the threads array
+     */
     async function createThread() {
         const response = await fetch('http://localhost:3000/api/threads', {
             method: 'POST',
@@ -44,6 +50,11 @@
         newThreadTitle = '';
     }
 
+    /**
+     * Vote function to update the vote count of an event
+     * @param id - the id of the event to vote on
+     * @param voteType - the type of vote to cast (upvote or downvote)
+     */
     async function voteThread(id, voteType) {
         try {
             const response = await fetch(`http://localhost:3000/api/threads/${id}/vote`, {
@@ -66,17 +77,27 @@
         }
     }
 
-
+    /**
+     * Check if the client has upvoted an event
+     * @param thread - the event to check
+     * @returns true if the client has upvoted the event, false otherwise
+     */
     function hasUpvoted(thread) {
         return thread.upvotedBy.includes(clientId);
     }
 
+    /**
+     * Check if the client has downvoted an event
+     * @param thread - the event to check
+     * @returns true if the client has downvoted the event, false otherwise
+     */
     function hasDownvoted(thread) {
         return thread.downvotedBy.includes(clientId);
     }
 </script>
 
 <main>
+    <!-- Title Bar -->
     <div class="title-bar">
         <div class="title-text">HDSI Student Council</div>
         <div class="title-subtext">
@@ -85,31 +106,38 @@
         </div>
     </div>
 
+    <!-- Fixed Navigation Bar -->
     <NavigationBar />
 
+    <!-- Main Page -->
     <div class="main-page">
+        <!-- Introduction Section -->
         <section id="Top">
             <img id="logo" src="/assets/logo.png" alt="HDSI Student Council"/>
             <h2>WE ARE HERE!</h2>
+            <!-- Introduction Text -->
             <p>
                 Introducing the all new HDSI Student Council, operated by data science students, and for ALL data science students! No matter if you are an undergraduate or graduate, majoring or minoring, prospective student or alumni, we are here to help you all!
                 Our mission is to advocate for the student body, and connect everyone with the school administration, department and campus resources, alumni, and outside institutes. 
                 As this is the first year for HDSI Student Council, we would like to collect feedback and suggestion from all of you on what we should focus on. Share with us any ideas, questions, complaints, or random thoughts you have! 
             </p>
             <div class="follow-us">
-                Remember to follow us:  
-                <a href="https://www.instagram.com/hdsistudentcouncil?igsh=MzRlODBiNWFlZA=="><img class="linked-icon" src="/assets/Instagram_Glyph_Black.png" alt="Instagram"></a> 
+                Remember to follow us:
+                <!-- Social Media Links, change or add more as needed -->
+                <a href="https://www.instagram.com/hdsistudentcouncil/"><img class="linked-icon" src="/assets/Instagram_Glyph_Black.png" alt="Instagram"></a> 
                 <a href="https://www.x.com/"><img class="linked-icon" src="/assets/X-logo-black.png" alt="Twitter/X"></a> 
                 <a href="https://www.linkedin.com/"><img class="linked-icon" src="/assets/LI-In-Bug.png" alt="LinkedIn"></a> 
                 <a href="https://www.discord.com/"><img class="linked-icon" src="/assets/discord-mark-black.png" alt="Discord"></a>
             </div>
         </section>
         <hr>
+        <!-- News and Upcoming Events Section -->
         <section id="News and Upcoming Events">
             <h2>Latest News & Events</h2>
             <ImageGallery />
         </section>
         <hr>
+        <!-- Feedback Form Section -->
         <section id="Feedback Form">
             <h2>Questions for HDSI or Student Council?</h2>
             <p>
@@ -118,6 +146,7 @@
                 You can share your thoughts on us, the department, or academic curriculum through our <u>Feedback & Suggestions Form</u>!
             </p>
             <div class="form-button-container">
+                <!-- Feedback Form Link -->
                 <a href="https://forms.gle/9shDPvjwwru9Lbtu9" target="_blank" class="form-button">
                     <span class="button-text">Give Us Feedback!</span>
                     <span class="button-icon">📝</span>
@@ -125,6 +154,7 @@
             </div>
         </section>
         <hr>
+        <!-- Vote Events Section -->
         <section id="Vote Events">
             <h2>Here Are Some Future Events. Vote For Your Favorite!</h2>
             <div class="threads-block">
@@ -139,19 +169,23 @@
             </div>
         </section>
         <hr>
+        <!-- Board Introduction Section -->
         <section id="Board Introduction">
             <h2>Meet the Board</h2>
             <BoardGallery />
         </section>
         <hr>
+        <!-- Student Resources Section -->
         <section id="Resources">
             <h2>Student Resources</h2>
+            <!-- TODO: Add resources here -->
             <div class="resources-channel">
                 <a href="placeholder">Apply For Conference Travel Fund</a>
             </div>
         </section>
     </div>
 
+    <!-- Footer Bar -->
     <div class="footer-bar">
         <div class="footer-logo-container">
             <a href="https://ucsd.edu/"><img class="footer-logo" src="/assets/ucsd-footer-logo-white.png" alt="UCSD"/></a>
@@ -258,22 +292,6 @@
     }
     .button-icon {
         font-size: 1.8rem;
-    }
-    form {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-    input {
-        flex-grow: 1;
-        padding: 5px;
-    }
-    button {
-        padding: 5px 10px;
-        background-color: #0079d3;
-        color: white;
-        border: none;
-        cursor: pointer;
     }
     .threads-block {
         background-color: #f5f5f5;

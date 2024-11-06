@@ -15,17 +15,17 @@
 <div class="thread">
     <h3>{thread.title}</h3>
     <div class="voting">
-        <span 
+        <button 
             class="vote upvote" 
             class:voted={upvoted} 
             on:click={() => vote(upvoted ? 'unvote' : 'upvote')}
-        >▲</span>
+        >▲</button>
         <span class="vote-count">{thread.upvotes - thread.downvotes}</span>
-        <span 
+        <button 
             class="vote downvote" 
             class:voted={downvoted} 
             on:click={() => vote(downvoted ? 'unvote' : 'downvote')}
-        >▼</span>
+        >▼</button>
     </div>
 </div>
 
@@ -53,6 +53,9 @@
         user-select: none;
         font-size: 30px;
         text-shadow: 3px 3px 5px #061920b3, 3px -3px 5px #06192033, -3px 3px 5px #06192033, -3px -3px 5px #06192033;
+        background: none;
+        border: none;
+        padding: 0;
     }
     .upvote {
         color: #fff;

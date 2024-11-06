@@ -1,5 +1,8 @@
 <script>
-    // Array of navigation items
+    /**
+     * Array of navigation items, id must match the section id in App.svelte
+     * Add or remove items as needed
+     */
     export let navItems = [
       { id: 'Top', label: 'We Are Here!', href: '#Top', icon: "👋🏻"},
       { id: 'News and Upcoming Events', label: 'Latest News & Events', href: '#News and Upcoming Events', icon: "🎯" },
@@ -12,7 +15,9 @@
     let activeSection = 'Top';
     let isExpanded = false;
   
-    // Function to handle smooth scrolling
+    /**
+     * Function to handle smooth scrolling
+     */
     function scrollToSection(sectionId) {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -20,7 +25,9 @@
       }
     }
   
-    // Update active section based on scroll position
+    /**
+     * Update active section based on scroll position
+     */
     function handleScroll() {
       const sections = navItems.map(item => document.getElementById(item.id));
       const scrollPosition = window.scrollY + 100; // Offset for fixed header
@@ -115,7 +122,7 @@
   .label {
     opacity: 0;
     transition: opacity 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-    transition-delay: 0.18s;
+    transition-delay: 0.18s; /* Delay needed for smooth transition */
     font-size: 0.9rem;
     text-align: left;
     flex-grow: 1;
